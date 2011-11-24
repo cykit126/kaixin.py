@@ -10,7 +10,7 @@ kaixin.py是kaixin.dev是一部分，kaixin.dev的目标是开心开发。kaixi.
 为什么开发这个框架？
 当我粗略了解了从大到小各种python web开发框架后发现，即使是web.py这个被认为最精简的框架我都觉得还有不少东西可以删除。所以有了kaixin.py。
 
-kaixin.py v0.1.0:
+0.1.0:
 基本的WSGI request和response封装
 事件机制
 HTTP工具类
