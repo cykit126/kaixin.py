@@ -24,29 +24,31 @@ class Response(object):
 
     def append_response_body(self, body):
         self._resp_body.append(body)
+
+    def get_response_body(self):
+        return self._resp_body        
         
     def append_response_header(self, header):
         self._resp_headers.append(header)
         
     def clear_response_headers(self):
         self._resp_headers = []
-        
-    def set_response_status(self, status):
-        self._resp_status = status
-        
-    def get_response_body(self):
-        return self._resp_body
-        
+
     def get_response_headers(self):
         return self._resp_headers
-        
+
+    def set_response_status(self, status):
+        self._resp_status = status
+                
+    def get_response_status(self):
+        return self._resp_status
 
 class Request(object):
     def __init__(self, environ):
-        self._environ = environ
+        self.environ = environ
         
     def get_request_url(self):
-        return self._environ['PATH_INFO']
+        return self.environ['PATH_INFO']
 
 
 
