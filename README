@@ -13,9 +13,9 @@ kaixin.py是kaixin.dev是一部分，kaixin.dev的目标是开心开发。kaixi.
 
 设计概要:
 kaixin.core
-  提供一个web应用必需的基本功能，任何一个web都至少可以只依赖这个包。
+  提供一个web应用必需的基本功能，任何一个web应用必需也仅需依赖于这个package中的类。
 kaixin.extension
-  提供web开发中各种具体应用，比如URL映射、字符串验证等非必需的工具。这是个可选的包。
+  提供web开发中各种具体应用，比如URL映射、字符串验证等非必需的工具。这是个可选的package。
 
 0.1.0:
 kaixin.core
