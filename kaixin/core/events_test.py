@@ -30,3 +30,6 @@ class EventsTest(unittest.TestCase):
         self._events.remove_subscriber("test",sub1)
         self._events.fire_event("test",y=2)
         self.assertEqual(0,sub1.x)
+
+if __name__ == '__main__':
+    unittest.main()

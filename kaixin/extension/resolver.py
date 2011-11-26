@@ -2,40 +2,32 @@
 
 __author__ = 'Wilbur Luo'
 
+import re
+
+_regex_type = type(re.compile('a'))
+def is_regex(obj):
+    return type(obj) == _regx_type
+
 class RegexResolver(object):
     """
-    Map url with string.
+    RegexResolver使用正则表达式匹配url，返回注册的handler和参数。
     """
-
+    
     def __init__(self):
         self._url_handler_map = {}
-
-    def add_url(self,url,handler):
-        if type(url) != type(""):
+    
+    def add_handler(self,pattern,handler):
+        if type(pattern) != type(''):
             return False
-        if handler is None:
-            return False
-        self._url_handler_map[url] = handler
+        self._url_handler_map[pattern] = handler
         return True
-
-
-    def __call__(self, url):
-        if type(url) != type(""):
-            return (None,None)
-
-        params = []
-        handler = None
-        for item in self._url_handler_map.keys():
-            hdler = self._url_handler_map[item]
-            url_appended = item.rstrip('/')+'/'
-            if url == item:
-                handler = hdler
-                break
-            elif url.startswith(url_appended):
-                handler = hdler
-                params = url[len(url_appended):].rstrip('/').split('/')
-                break
-        return (handler,params)
+    
+    def dispatch(self,url):
+        for regex in self._url_handler_map.keys():
+            match = re.match(regex,url)
+            if match is not None:
+                return [self._url_handler_map[regex],match.groupdict()]
+        return [None,{}]
 
 
 class ModulePageResolver(object):

@@ -20,3 +20,6 @@ class ConstTest(unittest.TestCase):
             self._const.z = 2
         except Exception,e:
             self.assertIsInstance(e,TypeError)
+
+if __name__ == '__main__':
+    unittest.main()
