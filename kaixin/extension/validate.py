@@ -1,5 +1,5 @@
 import re
-from const import Const
+from kaixin.core.const import Const
 
 _PATTERN = Const()
 _PATTERN.ipv4 = re.compile('(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})')

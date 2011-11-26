@@ -1,6 +1,6 @@
 ﻿# coding: utf-8
 #
-# Events提供了一个事件引擎，其它组件通过调用add_subscriber来注册它想监听的事件。
+# Events提供了一个事件引擎，其它组件通过调用add_listener来注册它想监听的事件。
 # 事件按照注册顺序会一直传播下去直到某个事件监听器返回True表示事件已经被处理。
 #
 
@@ -32,7 +32,7 @@ class Events(object):
         if event in self._events_subs_map:
             subscribers = self._events_subs_map[event]
             for sub in subscribers:
-                if not sub(**args):
+                if sub(**args):
                     return True
         return False
 
