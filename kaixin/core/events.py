@@ -39,7 +39,6 @@ class Events(object):
 _events = Events()
 
 def add_listener(event, listener):
-    print event, str(listener)
     _events.add_listener(event, listener)
 
 def remove_listener(event, listener):
