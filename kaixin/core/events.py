@@ -39,6 +39,7 @@ class Events(object):
 _events = Events()
 
 def add_listener(event, listener):
+    print event, str(listener)
     _events.add_listener(event, listener)
 
 def remove_listener(event, listener):
@@ -47,6 +48,14 @@ def remove_listener(event, listener):
 def fire_event(event, **args):
     _events.fire_event(event, **args)
 
+
+# decorator
+class register_listener:
+    def __init__(self, event):
+        self._event = event
+    def __call__(self, listener):
+        add_listener(self._event, listener)
+        return listener
 
 
 
