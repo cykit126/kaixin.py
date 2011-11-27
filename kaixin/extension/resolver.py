@@ -4,10 +4,6 @@ __author__ = 'Wilbur Luo'
 
 import re
 
-_regex_type = type(re.compile('a'))
-def is_regex(obj):
-    return type(obj) == _regx_type
-
 class RegexResolver(object):
     """
     RegexResolver使用正则表达式匹配url，返回注册的handler和参数。
@@ -16,18 +12,18 @@ class RegexResolver(object):
     def __init__(self):
         self._url_handler_map = {}
     
-    def add_handler(self,pattern,handler):
+    def register_handler(self, pattern, handler):
         if type(pattern) != type(''):
             return False
         self._url_handler_map[pattern] = handler
         return True
     
-    def dispatch(self,url):
+    def dispatch(self, url):
         for regex in self._url_handler_map.keys():
-            match = re.match(regex,url)
+            match = re.match(regex, url)
             if match is not None:
-                return [self._url_handler_map[regex],match.groupdict()]
-        return [None,{}]
+                return [self._url_handler_map[regex], match.groupdict()]
+        return None, {}
 
 
 class ModulePageResolver(object):
@@ -37,7 +33,8 @@ class ModulePageResolver(object):
 
     def __call__(self, url):
         if type(url) != type(""):
-            return (None,None,[])
+            return None, None, []
+        
         segments = self._extra_params(url)
         module = 'index'
         page = 'index'
@@ -48,8 +45,8 @@ class ModulePageResolver(object):
         	page = segments[1]
         if len(segments) >= 3:
         	params = segments[2:]
-        return (module,page,params)
+        return module, page, params
 
 
-    def _extra_params(self,url):
+    def _extra_params(self, url):
         return url.lstrip('/').rstrip('/').split('/')

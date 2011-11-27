@@ -27,7 +27,7 @@ def test(app):
 class RegexResovlerTest(unittest.TestCase):    
     def test_simple(self):
         resolver = RegexResolver()
-        self.assertTrue(resolver.add_handler("/test/(?P<id>\d+)/(?P<name>\w+)", test))
+        self.assertTrue(resolver.register_handler("/test/(?P<id>\d+)/(?P<name>\w+)", test))
         handler, matches = resolver.dispatch("/test/1/hero")
         self.assertEqual('1', matches['id'])
         self.assertEqual('hero', matches['name'])

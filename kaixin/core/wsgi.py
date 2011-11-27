@@ -10,8 +10,7 @@ class Context(object):
     def __init__(self, request, response):
         self.request = request
         self.response = response
-        self.events = Events()
-        
+   
 class Response(object):
     def __init__(self):
         self._dispatcher = None
