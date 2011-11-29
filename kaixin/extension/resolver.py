@@ -11,15 +11,17 @@ class RegexResolver(object):
     
     def __init__(self):
         self._url_handler_map = {}
+        self._keys = [] 
     
     def register_handler(self, pattern, handler):
         if type(pattern) != type(''):
             return False
         self._url_handler_map[pattern] = handler
+        self._keys = sorted(self._url_handler_map.iterkeys(), cmp=lambda x,y: cmp(y,x))
         return True
     
     def dispatch(self, url):
-        for regex in self._url_handler_map.keys():
+        for regex in self._keys:
             match = re.match(regex, url)
             if match is not None:
                 return [self._url_handler_map[regex], match.groupdict()]

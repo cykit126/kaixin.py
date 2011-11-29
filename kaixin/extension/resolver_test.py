@@ -1,4 +1,4 @@
-# coding: utf-8
+﻿# coding: utf-8
 
 import unittest
 from resolver import ModulePageResolver
@@ -20,15 +20,14 @@ class ModulePageResolverTest(unittest.TestCase):
         self.assertEqual('index', page)
         self.assertEqual([], params)
 
-
-def test(app):
-    pass
-
 class RegexResovlerTest(unittest.TestCase):    
     def test_simple(self):
         resolver = RegexResolver()
-        self.assertTrue(resolver.register_handler("/test/(?P<id>\d+)/(?P<name>\w+)", test))
+        self.assertTrue(resolver.register_handler("/test/(?P<id>\d+)/(?P<name>\w+)", 1))
+        self.assertTrue(resolver.register_handler('/', 2))
+        self.assertTrue(resolver.register_handler('/logout\.html', 3))
         handler, matches = resolver.dispatch("/test/1/hero")
+        self.assertEqual(1,handler)
         self.assertEqual('1', matches['id'])
         self.assertEqual('hero', matches['name'])
 
