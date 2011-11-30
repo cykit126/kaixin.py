@@ -20,16 +20,26 @@ class ModulePageResolverTest(unittest.TestCase):
         self.assertEqual('index', page)
         self.assertEqual([], params)
 
-class RegexResovlerTest(unittest.TestCase):    
+class RegexResovlerTest(unittest.TestCase):
     def test_simple(self):
         resolver = RegexResolver()
-        self.assertTrue(resolver.register_handler("/test/(?P<id>\d+)/(?P<name>\w+)", 1))
-        self.assertTrue(resolver.register_handler('/', 2))
-        self.assertTrue(resolver.register_handler('/logout\.html', 3))
+        self.assertTrue(resolver.register_handler("^/test/(?P<id>\d+)/(?P<name>\w+)$", 1))
+        self.assertTrue(resolver.register_handler("^/$", 2))
+        self.assertTrue(resolver.register_handler("^/logout\.html$", 3))
         handler, matches = resolver.dispatch("/test/1/hero")
         self.assertEqual(1,handler)
         self.assertEqual('1', matches['id'])
         self.assertEqual('hero', matches['name'])
+    
+    def test_full_match(self):
+        resolver = RegexResolver()
+        self.assertTrue(resolver.register_handler('^/$', 1))
+        self.assertTrue(resolver.register_handler('^/abc$', 1))
+        self.assertTrue(resolver.register_handler('^/abcdef$', 2))
+        handler, matches = resolver.dispatch("/a")
+        self.assertEqual(None, handler)
+        handler, matches = resolver.dispatch('/abc')
+        self.assertEqual(1, handler)
 
 if __name__ == '__main__':
     unittest.main()

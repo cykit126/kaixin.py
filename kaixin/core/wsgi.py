@@ -78,8 +78,11 @@ class Request(object):
                 self.cookie = SimpleCookie()
         else:
             self.cookie = SimpleCookie() 
+        query_string = environ['QUERY_STRING']
+        self.query = urlparse.parse_qs(query_string, keep_blank_values=True, strict_parsing=False)
+        environ['QUERY_STRING'] = ''
         self.form = FieldStorage(fp=environ['wsgi.input'], environ=environ, keep_blank_values=False)
-        self.query = urlparse.parse_qs(environ['QUERY_STRING'], keep_blank_values=True, strict_parsing=False)
+        environ['QUERY_STRING'] = query_string
         
     def get_request_url(self):
         return self.environ['PATH_INFO']
@@ -89,8 +92,17 @@ class Request(object):
             return self.cookie[key].value
         else:
             return default
-    
+
     def GET(self, key, default=''):
+        """
+        这个函数返回的是一个值，而不是一个list，GETobject返回一个list
+        """
+        if key in self.query:
+            return self.query[key][0]
+        else:
+            return default
+
+    def GETobject(self, key, default=None):
         if key in self.query:
             return self.query[key]
         else:
@@ -102,11 +114,11 @@ class Request(object):
         else:
             return default
 
-    def POSTobject(self, key):
+    def POSTobject(self, key, default=None):
         if key in self.form:
             return self.form[key]
         else:
-            return None
+            return default
 
 
 

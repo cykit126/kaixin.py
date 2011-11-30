@@ -11,17 +11,16 @@ class RegexResolver(object):
     
     def __init__(self):
         self._url_handler_map = {}
-        self._keys = [] 
     
     def register_handler(self, pattern, handler):
         if type(pattern) != type(''):
             return False
         self._url_handler_map[pattern] = handler
-        self._keys = sorted(self._url_handler_map.iterkeys(), cmp=lambda x,y: cmp(y,x))
         return True
     
     def dispatch(self, url):
-        for regex in self._keys:
+        keys = self._url_handler_map.iterkeys()
+        for regex in keys:
             match = re.match(regex, url)
             if match is not None:
                 return [self._url_handler_map[regex], match.groupdict()]
@@ -48,7 +47,6 @@ class ModulePageResolver(object):
         if len(segments) >= 3:
         	params = segments[2:]
         return module, page, params
-
 
     def _extra_params(self, url):
         return url.lstrip('/').rstrip('/').split('/')
