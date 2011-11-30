@@ -45,7 +45,7 @@ def remove_listener(event, listener):
     _events.remove_listener(event, listener)
 
 def fire_event(event, **args):
-    _events.fire_event(event, **args)
+    return _events.fire_event(event, **args)
 
 
 # decorator
