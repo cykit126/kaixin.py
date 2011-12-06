@@ -8,6 +8,7 @@ from Cookie import Morsel
 from http import get_past_time
 from cgi import FieldStorage
 import urlparse
+import types
 
 class Context(object):
     def __init__(self, request, response):
@@ -110,7 +111,10 @@ class Request(object):
     
     def POST(self, key, default=''):
         if key in self.form:
-            return self.form[key].value
+            if isinstance(self.form[key], types.ListType):
+                return self.form[key][0].value
+            else:
+                return self.form[key].value
         else:
             return default
 
