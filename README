@@ -1,14 +1,15 @@
 罗伟滨 Wilbur Luo
-以coding的方式表达我的思想，阐述我的世界观，结交志同道合的朋友。
 cykit126@gmail.com
 kaixindev.org
 
-py.kaixindev.org
-kaixin.py是一个非常轻量级的web开发框架，提供基于事件的插件机制。目前仍然处于非常初级的阶段，只完成了最基本的功能，测试用例都还没完成。
+===============================================================================
+= 简体中文
+===============================================================================
+以coding的方式表达我的思想，阐述我的世界观，结交志同道合的朋友。
 
-kaixin.py是kaixin.dev是一部分，kaixin.dev的目标是开心开发。kaixi.dev的项目网址kaixindev.org。
+kaixin.py是一个非常轻量级的web库，提供基于事件的插件机制。
 
-为什么开发这个框架？
+为什么开发这个库？
 当我粗略了解了从大到小各种python web开发框架后发现，即使是web.py这个被认为最精简的框架我都觉得还有不少东西可以删除。所以有了kaixin.py。
 
 设计概要:
@@ -22,8 +23,35 @@ kaixin.core
   WSGI封装，Rquest, Response 和 Context
   事件机制
   HTTP工具类
-  日志
   常量实现
 kaixin.extension
   URL映射
   字符串验证工具类
+
+===============================================================================
+= English
+===============================================================================
+Expressing myself and finding friends by coding.
+
+kaixin.py is a lightweight web development library. kaixin.py provides event-based plugins. 
+
+Why do I develop kaixin.py?
+After explorering a lot of python web framework, I think they are not simple enough. web.py is good, but still not simple enough.
+And I like doing thing in my way. So there is kaixin.py.
+
+pacakges:
+kaixin.core
+  Provides basic fundamental features. kaixin.py applications MUST and ONLY depend on this package.
+kaixin.extension
+  Provides some others optional classes, such as URL mapping, input validation and so on.
+
+0.1.0
+kaixin.core
+  WSGI wrappers, Request, Response and Context
+  Event-based plugins
+  HTTP utilities
+  Constant implementation
+kaixin.extension
+  URL mapping
+  String validation utilities
+  
